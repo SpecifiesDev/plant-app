@@ -1,42 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Loader</title>
+    <title>Plant App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="./src/sheets/main.css">
-</head>
-<body>
-<div class="container">
-    <h1>Plant App</h1>
-    <div class="row">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Plant App</h1>
+      <button id="createBtn">Create New Item</button>
+      <div class="row">
         <input type="text" id="searchInput" placeholder="Search...">
         <select id="yearSelect">
-            <option value="all">All Years</option>
+          <option value="all">All Years</option>
         </select>
         <select id="typeSelect">
-            <option value="all">All Types</option>
+          <option value="all">All Types</option>
+          <option value="Tomato">Tomato</option>
+          <option value="Squash">Squash</option>
+          <option value="Cauliflower">Cauliflower</option>
+          <!-- Add more types as needed -->
+        </select>
+      </div>
+      <!-- Add this HTML for the modal inside the body tag -->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <input type="text" id="itemName" placeholder="Item Name">
+          <input type="date" id="itemDate" placeholder="Date Planted">
+          <select id="itemType">
             <option value="Tomato">Tomato</option>
             <option value="Squash">Squash</option>
             <option value="Cauliflower">Cauliflower</option>
-            <!-- Add more types as needed -->
-        </select>
-    </div>
-
-    <table id="fileTable">
+          </select>
+          <button id="saveBtn">Save</button>
+          <button id="exitBtn">Exit</button>
+        </div>
+      </div>
+      <table id="fileTable">
         <thead>
-        <tr>
+          <tr>
             <th>Name</th>
             <th>Type</th>
             <th>Year</th>
-        </tr>
+          </tr>
         </thead>
         <tbody id="fileTableBody">
-        <!-- File rows will be inserted here dynamically -->
+          <!-- File rows will be inserted here dynamically -->
         </tbody>
-    </table>
-</div>
-
-<script src="./src/scripts/mainRenderer.js"></script>
-</body>
+      </table>
+    </div>
+    <script src="./src/scripts/mainRenderer.js"></script>
+  </body>
 </html>

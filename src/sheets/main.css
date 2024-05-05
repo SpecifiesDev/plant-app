@@ -1,62 +1,146 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  input[type="text"],
-  select {
-    padding: 8px;
-    width: calc(33.33% - 10px); /* Adjust the width as needed */
-    box-sizing: border-box;
-    margin-right: 10px; /* Add padding between elements */
-  }
-  
-  select:last-child {
-    margin-right: 0; /* Remove right margin from the last select */
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  th,
-  td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  tr:hover {
-    background-color: #ddd;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input[type="text"],
+select {
+  padding: 8px;
+  width: calc(33.33% - 10px); /* Adjust the width as needed */
+  box-sizing: border-box;
+  margin-right: 10px; /* Add padding between elements */
+}
+
+select:last-child {
+  margin-right: 0; /* Remove right margin from the last select */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+/* Style the modal to span the whole page */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999; /* Ensure the modal appears on top of other content */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+/* Style the modal content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 20vh auto; /* Center vertically with some margin from the top */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px; /* Limit the width of the modal content */
+}
+
+/* Style the close button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Style input and select elements */
+.modal-content input,
+.modal-content select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Style buttons */
+.modal-content button {
+  width: calc(50% - 5px); /* Set width to 50% minus half of the space */
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px; /* Add margin between the buttons */
+}
+
+.modal-content button:last-child {
+  margin-right: 0; /* Remove right margin from the last button */
+}
+
+.modal-content button:hover {
+  background-color: #0056b3;
+}
+
+#createBtn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#createBtn:hover {
+  background-color: #0056b3;
+}

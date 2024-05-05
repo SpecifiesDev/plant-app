@@ -9,7 +9,7 @@ let mainWindow;
 function createWindow() {
   // Create the browser window
  mainWindow = new BrowserWindow({
-    //fullscreen: true,
+    fullscreen: true,
     webPreferences: {
       nodeIntegration: true, // Enable node integration
       contextIsolation: false, // Enable context isolation
