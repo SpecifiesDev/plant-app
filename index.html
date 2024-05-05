@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Loader</title>
+    <link rel="stylesheet" href="./src/sheets/main.css">
+</head>
+<body>
+<div class="container">
+    <h1>Plant App</h1>
+    <div class="row">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <select id="yearSelect">
+            <option value="all">All Years</option>
+        </select>
+        <select id="typeSelect">
+            <option value="all">All Types</option>
+            <option value="Tomato">Tomato</option>
+            <option value="Squash">Squash</option>
+            <option value="Cauliflower">Cauliflower</option>
+            <!-- Add more types as needed -->
+        </select>
+    </div>
+
+    <table id="fileTable">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Year</th>
+        </tr>
+        </thead>
+        <tbody id="fileTableBody">
+        <!-- File rows will be inserted here dynamically -->
+        </tbody>
+    </table>
+</div>
+
+<script src="./src/scripts/mainRenderer.js"></script>
+</body>
+</html>

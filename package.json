@@ -1,0 +1,19 @@
+{
+  "name": "bourgoin-plant-app",
+  "version": "1.0.0",
+  "description": "A simple plant app used to track plants across seasons.",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^30.0.2"
+  },
+  "keywords": [
+    "electron",
+    "app",
+    "plant"
+  ],
+  "author": "SpecifiesDev",
+  "license": "MIT"
+}
