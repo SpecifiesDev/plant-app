@@ -1,0 +1,25 @@
+#error-container {
+    position: fixed;
+    top: 20px;
+    right: -400px;
+    background-color: #ff4d4d;
+    color: white;
+    padding: 20px; /* Increased padding */
+    font-size: 1.1em; /* Increased font size */
+    border-radius: 5px;
+    opacity: 0; /* Initially hidden */
+    transition: right 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Added right property to the transition */
+    display: flex; /* Use flexbox */
+    align-items: center; /* Center vertically */
+    justify-content: space-between; /* Space between items */
+}
+
+#error-container.show {
+    right: 20px;
+    opacity: 1; /* Visible when shown */
+}
+
+.close-btn {
+    cursor: pointer;
+    margin-left: 10px; /* Add some space between the message and the button */
+}

@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f8f8f8;
+  background-color: #f7f7f7b4;
   margin: 0;
   padding: 0;
 }
@@ -81,6 +81,7 @@ tr:hover {
   padding: 20px;
   border-radius: 10px;
   max-width: 400px; /* Limit the width of the modal content */
+  text-align: center;
 }
 
 /* Style the close button */
@@ -144,3 +145,78 @@ tr:hover {
 #createBtn:hover {
   background-color: #0056b3;
 }
+
+
+/* Style the delete button  for deleting items from table and data directory */
+.deleteBtn {
+  padding: 5px 10px; /* Adjust padding to make it smaller */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px; /* Adjust font size to make it smaller */
+}
+
+.deleteBtn:hover {
+  background-color: #0056b3;
+}
+
+/* Style the slider container */
+.slider-container {
+  margin-bottom: 15px;
+}
+
+/* Style the slider */
+.slider {
+  width: 100%;
+  -webkit-appearance: none; /* Remove default styles */
+  appearance: none;
+  height: 2px; /* Customize the height */
+  background: #ddd; /* Slider track color */
+  outline: none; /* Remove outline */
+  border-radius: 5px;
+}
+
+/* Style the slider thumb */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default styles */
+  appearance: none;
+  width: 16px; /* Customize the width */
+  height: 16px; /* Customize the height */
+  background: #007bff; /* Slider thumb color */
+  border-radius: 50%; /* Round shape */
+  cursor: pointer; /* Cursor style */
+}
+
+/* Style the number input */
+.number-input {
+  width: 50px; /* Adjust the width */
+  padding: 5px; /* Adjust the padding */
+  margin-left: 10px; /* Add margin from the slider */
+  border: 1px solid #ddd; /* Border color */
+  border-radius: 5px; /* Border radius */
+  text-align: center; /* Center-align text */
+  font-size: 14px; /* Font size */
+}
+
+
+
+.main-page-socials {
+  position: fixed;
+  bottom: 0;
+  right: 50%;
+  display: flex;
+  flex-direction: row;
+  gap: .2rem;
+  justify-content: center;
+}
+
+.main-page-socials-btn svg:hover {
+  scale: 130%;
+}
+
+.main-page-socials-btn svg {
+  color: black;
+}
+

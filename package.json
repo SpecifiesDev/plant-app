@@ -1,6 +1,6 @@
 {
   "name": "bourgoin-plant-app",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "A simple plant app used to track plants across seasons.",
   "main": "app.js",
   "scripts": {

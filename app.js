@@ -5,11 +5,13 @@ const url = require('url');
 
 let mainWindow;
 
+let devMode = false;
+
 // Function to create the browser window
 function createWindow() {
   // Create the browser window
  mainWindow = new BrowserWindow({
-    fullscreen: true,
+    fullscreen: !devMode,
     webPreferences: {
       nodeIntegration: true, // Enable node integration
       contextIsolation: false, // Enable context isolation
@@ -32,6 +34,10 @@ app.whenReady().then(() => {
   // Add the global shortcut key to open the dev tools
   globalShortcut.register('CommandOrControl+Shift+I', () => {
     BrowserWindow.getFocusedWindow().webContents.openDevTools();
+  });
+
+  globalShortcut.register('CommandOrControl+Shift+R', () => {
+    mainWindow.reload();
   });
 
   createWindow();
