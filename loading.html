@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    /* Circle */
+    .loading-circle {
+      width: 60px;
+      height: 60px;
+      border: 6px solid transparent;
+      border-top-color: #1a73e8;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite, colorShift 3s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes colorShift {
+      0% { border-top-color: #1a73e8; color: #1a73e8; }
+      25% { border-top-color: #4caf50; color: #4caf50; }
+      50% { border-top-color: #ff5722; color: #ff5722; }
+      75% { border-top-color: #673ab7; color: #673ab7; }
+      100% { border-top-color: #1a73e8; color: #1a73e8; }
+    }
+
+    .loading-text {
+      font-size: 24px;
+      font-weight: bold;
+      animation: colorShift 3s linear infinite;
+    }
+
+    /* Footer */
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 90%; /* Adjusted width */
+      left: 50%; /* Center the footer */
+      transform: translateX(-50%); /* Ensure perfect centering */
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+    }
+
+    footer a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-height: 600px) {
+      footer {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="loading-circle"></div>
+    <div class="loading-text">Loading</div>
+    <footer>
+      Made by <a href="https://github.com/SpecifiesDev" target="_blank">SpecifiesDev</a> | © 2025
+    </footer>
+  </div>
+</body>
+</html>

@@ -16,7 +16,7 @@ const addItemToTable = (item, index) => {
     const type = $('<td></td>').text(item.type);
     const year = $('<td></td>').text(item.year);
     row.append(name, type, year);
-	row.append(`<td><button class="deleteBtn" data-index="${index}">Delete</button></td>`); // Add delete button
+	row.append(`<td><button class="deleteBtn" data-id="${item.ID}">Delete</button></td>`); // Add delete button
     $('#fileTableBody').append(row);
 }
 

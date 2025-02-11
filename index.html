@@ -1,79 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant App</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="./src/sheets/main.css">
-    <link rel="stylesheet" href="./src/sheets/error.css">
-  </head>
-  <body>
-    <div id="error-container"></div>
-    <div class="container">
-      <h1>Plant App</h1>
-      <button id="createBtn">Create New Item</button>
-      <div class="row">
-        <input type="text" id="searchInput" placeholder="Search...">
-        <select id="yearSelect">
-          <option value="all">All Years</option>
-        </select>
-        <select id="typeSelect">
-          <option value="all">All Types</option>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant App</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="./src/sheets/main.css">
+  <link rel="stylesheet" href="./src/sheets/error.css">
+</head>
+
+<body>
+  <button class="exit-button" onclick="window.close()">X</button>
+  <div id="error-container"></div>
+  <div class="container">
+    <h1>Plant App</h1>
+    <button id="createBtn">Create New Item</button>
+    <div class="row">
+      <input type="text" id="searchInput" placeholder="Search...">
+      <select id="yearSelect">
+        <option value="all">All Years</option>
+      </select>
+      <select id="typeSelect">
+        <option value="all">All Types</option>
+        <option value="Tomato">Tomato</option>
+        <option value="Squash">Squash</option>
+        <option value="Cauliflower">Cauliflower</option>
+        <!-- Add more types as needed -->
+      </select>
+    </div>
+    <!-- Add this HTML for the modal inside the body tag -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <input type="text" id="itemName" placeholder="Item Name">
+        <input type="date" id="itemDate" placeholder="Date Planted">
+        <select id="itemType">
           <option value="Tomato">Tomato</option>
           <option value="Squash">Squash</option>
           <option value="Cauliflower">Cauliflower</option>
-          <!-- Add more types as needed -->
         </select>
-      </div>
-      <!-- Add this HTML for the modal inside the body tag -->
-      <div id="myModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <input type="text" id="itemName" placeholder="Item Name">
-          <input type="date" id="itemDate" placeholder="Date Planted">
-          <select id="itemType">
-            <option value="Tomato">Tomato</option>
-            <option value="Squash">Squash</option>
-            <option value="Cauliflower">Cauliflower</option>
-          </select>
-          <div class="slider-container">
-            <input type="range" min="0" max="300" value="0" class="slider" id="itemRows">
-            <input type="number" min="0" max="300" value="0" class="number-input" id="itemRowsNumber">
-            <span id="rowIndicator">0 plants</span>
-          </div>
-          <button id="saveBtn">Save</button>
-          <button id="exitBtn">Exit</button>
+        <div class="slider-container">
+          <input type="range" min="0" max="300" value="0" class="slider" id="itemRows">
+          <input type="number" min="0" max="300" value="0" class="number-input" id="itemRowsNumber">
+          <span id="rowIndicator">0 plants</span>
         </div>
+        <button id="saveBtn">Save</button>
+        <button id="exitBtn">Exit</button>
       </div>
-      <table id="fileTable">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Year</th>
-            <th>Delete</th>
-            <!-- New column for delete button -->
-          </tr>
-        </thead>
-        <tbody id="fileTableBody">
-          <!-- File rows will be inserted here dynamically -->
-        </tbody>
-      </table>
+    </div>
+    <table id="fileTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Year</th>
+          <th>Delete</th>
+          <!-- New column for delete button -->
+        </tr>
+      </thead>
+      <tbody id="fileTableBody">
+        <!-- File rows will be inserted here dynamically -->
+      </tbody>
+    </table>
 
-      <!-- I've pulled this code off of my about me, as I like how the design looks.-->
-      <div class="main-page-socials">
-        <div class="main-page-socials">
-          <div class="main-page-socials-btn">
-            <a href="https://github.com/SpecifiesDev/" target="_blank">
-              <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-              </svg>
-              
-            </a>
-          </div>
-        </div>
-      </div>
-      <script src="./src/scripts/mainRenderer.js"></script>
-  </body>
+    <script src="./src/scripts/mainRenderer.js"></script>
+</body>
+
 </html>

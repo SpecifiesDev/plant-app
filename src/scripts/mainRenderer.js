@@ -9,53 +9,51 @@ const error = require(`${__dirname}/src/scripts/errorHandler.js`);
 const { filterTable, searchTable, generateYearOptions, closeCreationModal, updateRowIndicator, addItemToTable } = require(`${__dirname}/src/scripts/main/utils.js`);
 
 
+const SQLManager = require(`${__dirname}/src/scripts/dbManager.js`);
+
+let sqlManager;
+
 // due to path limitations, render files needs to be in the main class.
-const renderFiles = () => {
+const renderDatabase = async () => {
     $('#fileTableBody').empty();
-    fs.readdir(`${__dirname}/data`, (err, files) => {
 
-        // if there was an error indicate in console, may create a popup later
-        if (err) {
-            error.showError(`Error reading files: ${err}`);
-            return;
-        }
+	try {
+		
+		// query, order desc
+		const query = "SELECT * FROM plant_year ORDER by YEAR DESC";
+		const params = []
 
-        // loop over each file
-        files.forEach((file, index) => {
+		let results = await sqlManager.executeQuery(query, params);
 
-            // get path of target file
-            const filePath = path.join(`${__dirname}/data`, file);
+		if(Array.isArray(results)) {
+			results.forEach((row, index) => {
+				addItemToTable(row, index);
+			});
+		} else {
+			error.showError("Error querying database, unexpected query return format.");
+		}
 
-            // read the file and process the data into the table
-            fs.readFile(filePath, 'utf8', (err, data) => {
-                // error log
-                if (err) {
-                    error.showError(`Error reading file: ${file}`);
-					console.error(err);
-                    return;
-                }
-
-                try {
-                    const parsedJSON = JSON.parse(data);
-
-                    addItemToTable(parsedJSON, index);
-
-
-                } catch (err) {
-                    error.showError(`Error parsing JSON: ${err}`);
-					console.error(err);
-                    return;
-                }
-            });
-
-        });
-
-    });
+	} catch(err) {
+		error.showError("Error querying database, check console for more info.");
+		console.error(err);
+	}
 };
 
 
 // new jquery equiv for $(document).ready()
 $(() => {
+
+	ipcRenderer.on('sql-manager-ready', async (event, data) => {
+		if(!data.success) {
+			error.showError("Database was not properly created, refer to console for errors.");
+		} else {
+			
+
+			sqlManager = await new SQLManager();
+
+			renderDatabase(); // we call here to make sure the database is ready to call to
+		}
+	})
 
 	// Event listener for search input
 	$('#searchInput').on('input', () => {
@@ -91,48 +89,59 @@ $(() => {
 
 	// Add event listener to save button in modal
 	$('#saveBtn').on('click', async () => {
-		const newItem = {
+		// create a new item object from the modal info
+		const item = {
 			name: $('#itemName').val(),
 			type: $('#itemType').val(),
-			year: $('#itemDate').val().substr(0, 4),
-			plants: $('#itemRows').val()
-		};
-		// Save newItem to JSON file
-		// Implement saving functionality here
+			year: $('#itemDate').val().substr(0, 4), // only the year
+			rows: $('#itemRows').val()
+		}
 
-		// Close modal
-		closeCreationModal();
+		try {
+			const query = "INSERT INTO plant_year (name, type, year, plants) VALUES (?, ?, ?, ?)";
+			const params = [item.name, item.type, item.year, item.rows];
 
-		// Render all files, including the newly added item
+			const result = await sqlManager.executeQuery(query, params);
 
-		if (fs.existsSync(`${__dirname}/data/${newItem.name}.json`)) {
-			error.showError("Object with this name already exists. Please choose a different name or delete the old record.");
-		} else {
-			
-			await fs.writeFileSync(`${__dirname}/data/${newItem.name}.json`, JSON.stringify(newItem, null, 2));
-			renderFiles();
+			// if result is not null and an id was return (auto increment)
+			if(result && result.insertId) {
+				item.ID = result.insertId;
+				addItemToTable(item, $("#fileTableBody tr").length); // add item to table at end of list
+				closeCreationModal(); // close the modal
+			} else {
+				error.showError("Error inserting item into database. No ID was returned from the database connection.");
+			}
+		} catch(err) {
+			error.showError("Error inserting item into database, check console for more info.");
+			console.error(err);
 		}
 	});
 
 	// when a delete button is clicked, delete the file, and delete the row from the table.
-	$('#fileTableBody').on('click', '.deleteBtn', (e) => {
+	$('#fileTableBody').on('click', '.deleteBtn', async (e) => {
 
-		// get the row containing the delete button
-		const row = $(e.target).closest('tr');
+		// get the target's id
+		const target = $(e.target).data('id');
 
-		const name = row.find('td:eq(0)').text(); 
-		const type = row.find('td:eq(1)').text(); 
-		const year = row.find('td:eq(2)').text();
+		console.log(target);
 
-		fs.unlink(`${__dirname}/data/${name}.json`, (err) => {
-			if (err) {
-				error.showError(`Error deleting file: ${err}`);
-				console.error(err);
-				return;
+		// try to delete the object from the database
+		try {
+			const query = "DELETE FROM plant_year WHERE ID = ?";
+			const params = [target];
+
+			const result = await sqlManager.executeQuery(query, params);
+
+			// if result isnt null and a row was modified it was successful
+			if(result && result.affectedRows > 0) {
+				$(e.target).closest('tr').remove(); // remove the item from table
+			} // else we show an error
+			else {
+				error.showError("Error deleting item from database, check console for more info.");
 			}
-
-			row.remove();
-		});
+		} catch(err) {
+			console.error(err);
+		}
 
 
 	});
@@ -164,8 +173,6 @@ $(() => {
 		error.hideError();
 	});
 
-	// initial call to render any files that are in the data directory
-	renderFiles();
 
 	// generate the year options into the input dropdown
 	generateYearOptions();

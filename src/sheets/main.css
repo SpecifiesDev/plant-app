@@ -1,21 +1,27 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f7f7f7b4;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
+  color: white;
+  overflow-x: hidden; /* Hide horizontal scroll */
 }
 
 .container {
   max-width: 800px;
-  margin: 20px auto;
+  margin: 60px auto 20px auto; /* Increased top margin */
   padding: 20px;
-  background-color: #fff;
+  background-color: rgba(30, 41, 59, 0.9);
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
+  color: #6EE7B7;
 }
 
 .row {
@@ -26,14 +32,35 @@ h1 {
 
 input[type="text"],
 select {
-  padding: 8px;
-  width: calc(33.33% - 10px); /* Adjust the width as needed */
+  padding: 10px;
+  width: calc(33.33% - 10px);
   box-sizing: border-box;
-  margin-right: 10px; /* Add padding between elements */
+  margin-right: 10px;
+  background-color: rgba(52, 64, 81, 0.8);
+  color: white;
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+  /* Add these styles to remove blue highlight on tap (mobile) */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+  -webkit-focus-ring-color: rgba(0, 0, 0, 0) !important;
+  outline: none; /* Remove the default outline */
+  appearance: none; /* Remove default arrow */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394A3B8'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E"); /* Custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 16px;
+  padding-right: 30px; /* Space for arrow */
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: #6EE7B7;
+  outline: none;
 }
 
 select:last-child {
-  margin-right: 0; /* Remove right margin from the last select */
+  margin-right: 0;
 }
 
 table {
@@ -44,49 +71,52 @@ table {
 
 th,
 td {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
+  padding: 12px 8px;
+  border-bottom: 1px solid rgba(71, 85, 105, 0.5);
   text-align: left;
+  color: #CBD5E0;
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: rgba(52, 64, 81, 0.5);
+  color: #94A3B8;
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: rgba(52, 64, 81, 0.3);
 }
 
 tr:hover {
-  background-color: #ddd;
+  background-color: rgba(71, 85, 105, 0.3);
 }
 
-/* Style the modal to span the whole page */
+/* Style the modal */
 .modal {
-  display: none;
   position: fixed;
-  z-index: 9999; /* Ensure the modal appears on top of other content */
+  z-index: 9999;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  backdrop-filter: blur(5px); /* Apply blur effect */
+  display: none;
 }
 
-/* Style the modal content */
 .modal-content {
-  background-color: #fefefe;
-  margin: 20vh auto; /* Center vertically with some margin from the top */
+  background-color: rgba(30, 41, 59, 0.7); /* Translucent dark background */
+  margin: 15vh auto;
   padding: 20px;
   border-radius: 10px;
-  max-width: 400px; /* Limit the width of the modal content */
+  max-width: 400px;
   text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(71, 85, 105, 0.5); /* Add a subtle border */
 }
 
-/* Style the close button */
 .close {
-  color: #aaa;
+  color: #94A3B8;
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -94,129 +124,179 @@ tr:hover {
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: #CBD5E0;
   text-decoration: none;
   cursor: pointer;
 }
 
-/* Style input and select elements */
 .modal-content input,
 .modal-content select {
   display: block;
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  background-color: rgba(52, 64, 81, 0.8);
+  color: white;
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  border-radius: 6px;
   box-sizing: border-box;
 }
 
-/* Style buttons */
-.modal-content button {
-  width: calc(50% - 5px); /* Set width to 50% minus half of the space */
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 5px; /* Add margin between the buttons */
-}
-
-.modal-content button:last-child {
-  margin-right: 0; /* Remove right margin from the last button */
-}
-
-.modal-content button:hover {
-  background-color: #0056b3;
-}
-
-#createBtn {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#createBtn:hover {
-  background-color: #0056b3;
-}
-
-
-/* Style the delete button  for deleting items from table and data directory */
+#createBtn,
+.modal-content button,
 .deleteBtn {
-  padding: 5px 10px; /* Adjust padding to make it smaller */
-  background-color: #007bff;
-  color: #fff;
+  padding: 10px 20px;
+  background-color: #34D399;
+  color: #1E293B;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 12px; /* Adjust font size to make it smaller */
+  transition: background-color 0.3s ease;
 }
 
+#createBtn:hover,
+.modal-content button:hover,
 .deleteBtn:hover {
-  background-color: #0056b3;
-}
-
-/* Style the slider container */
-.slider-container {
-  margin-bottom: 15px;
+  background-color: #22C55E;
 }
 
 /* Style the slider */
 .slider {
   width: 100%;
-  -webkit-appearance: none; /* Remove default styles */
+  height: 4px;
+  background: #475569;
+  outline: none;
+  border-radius: 6px;
+  -webkit-appearance: none;
   appearance: none;
-  height: 2px; /* Customize the height */
-  background: #ddd; /* Slider track color */
-  outline: none; /* Remove outline */
-  border-radius: 5px;
 }
 
-/* Style the slider thumb */
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Remove default styles */
+  -webkit-appearance: none;
   appearance: none;
-  width: 16px; /* Customize the width */
-  height: 16px; /* Customize the height */
-  background: #007bff; /* Slider thumb color */
-  border-radius: 50%; /* Round shape */
-  cursor: pointer; /* Cursor style */
+  width: 20px;
+  height: 20px;
+  background: #34D399;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 /* Style the number input */
 .number-input {
-  width: 50px; /* Adjust the width */
-  padding: 5px; /* Adjust the padding */
-  margin-left: 10px; /* Add margin from the slider */
-  border: 1px solid #ddd; /* Border color */
-  border-radius: 5px; /* Border radius */
-  text-align: center; /* Center-align text */
-  font-size: 14px; /* Font size */
+  width: 60px;
+  padding: 8px;
+  margin-left: 10px;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+  background-color: rgba(52, 64, 81, 0.8);
+  color: white;
 }
 
-
-
-.main-page-socials {
-  position: fixed;
-  bottom: 0;
-  right: 50%;
+/* Updated styles for the slider container */
+.slider-container {
+  margin-bottom: 15px;
   display: flex;
-  flex-direction: row;
-  gap: .2rem;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+}
+
+/* Attempt to style the date input calendar */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Invert the icon color */
+}
+
+/* Style the dropdown options */
+select option {
+  background-color: #1E293B; /* Set option background color */
+  color: #CBD5E0; /* Set option text color */
+}
+
+select option:hover {
+  background-color: #34D399; /* Green-teal on hover */
+  color: #1E293B; /* Dark text on hover */
+}
+
+/* Change the focus color for select elements to the green-teal color */
+select:focus {
+  border-color: #34D399; /* Set focus border color to green-teal */
+  outline: none; /* Remove the default outline */
+}
+
+/* Remove the blue highlight color when the select is tapped (for mobile) */
+select {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important; /* Transparent highlight on tap */
+}
+
+select::-ms-expand {
+   display: none;
+}
+
+/* Styling the scrollbar for WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 8px; /* Adjust width as needed */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #1E293B; /* Color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #475569; /* Color of the scroll thumb */
+  border-radius: 4px; /* Round the corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #64748B; /* Darken the thumb on hover */
+}
+
+/* Re-enable vertical scrolling on body, to have only a horizontal bar we use 'overflow-x: hidden;'*/
+body {
+  overflow-y: auto;
+}
+
+/* Top-Right Exit Button Styling */
+.exit-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  background-color: rgba(52, 64, 81, 0.5); /* Semi-transparent background */
+  color: #CBD5E0; /* Light text color */
+  font-size: 1.2em;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  z-index: 1000; /* Ensure it's on top of other elements */
+  line-height: 0; /* Remove extra line-height */
 }
 
-.main-page-socials-btn svg:hover {
-  scale: 130%;
+.exit-button:hover {
+  background-color: #34D399; /* Green on hover */
+  color: #1E293B;
 }
 
-.main-page-socials-btn svg {
-  color: black;
+/* Style the "Create New Item" button */
+#createBtn {
+  display: block;
+  margin: 20px auto; /* Center the button horizontally */
+  text-align: center;
+  max-width: 200px;
+  padding: 10px 20px; /* Add padding to the button */
+  background-color: #34D399;
+  color: #1E293B;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
+#createBtn:hover {
+  background-color: #22C55E;
+}
